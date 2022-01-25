@@ -1,14 +1,18 @@
 import React from "react"
+import { ImageGalleryItemLi, ImageGalleryItemImg } from "./ImageGalleryItem.styled";
 
-const ImageGalleryItem = ({img}) => {
-  const { tags, webformatURL } = img;
-  
+const ImageGalleryItem = ({id, largeUrl, toggleMod, srcSmall, srcLarge}) => {
   return (
-    <li >
-       <img src={webformatURL} alt={tags} />
-    </li>
+    <ImageGalleryItemLi id={id}>
+       <ImageGalleryItemImg 
+       onClick={() => {
+        toggleMod();
+        largeUrl(srcLarge);
+        }}
+       src={srcSmall} 
+       alt='' />
+    </ImageGalleryItemLi>
   );
 }
 export default ImageGalleryItem
 
-// className="gallery-item"

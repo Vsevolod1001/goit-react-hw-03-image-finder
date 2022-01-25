@@ -1,18 +1,21 @@
 import React from "react"
+import { ImageGalleryUl } from "./ImageGallery.styled"
 import ImageGalleryItem from "../ImageGalleryItem"
 
-const ImageGallery = ({images}) => {
+const ImageGallery = ({images, toggleM, largeUrl}) => {
   return (
-    <ul >
-        {images.map(image => (
+    <ImageGalleryUl>
+        {images.map(({id, webformatURL, largeImageURL}) => (
           <ImageGalleryItem 
-          key={image.id}
-          img={image}
+          largeUrl={largeUrl}
+          toggleMod={toggleM}
+          key={id}
+          srcSmall={webformatURL}
+          srcLarge={largeImageURL}
           />
         ))}
-    </ul>
+    </ImageGalleryUl>
   )
 }
 export default ImageGallery
 
-// className="gallery"
