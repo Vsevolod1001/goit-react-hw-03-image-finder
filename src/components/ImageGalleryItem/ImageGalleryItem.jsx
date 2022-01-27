@@ -1,5 +1,6 @@
 import React from "react"
 import { ImageGalleryItemLi, ImageGalleryItemImg } from "./ImageGalleryItem.styled";
+import PropTypes from "prop-types";
 
 const ImageGalleryItem = ({id, largeUrl, toggleMod, srcSmall, srcLarge}) => {
   return (
@@ -13,6 +14,15 @@ const ImageGalleryItem = ({id, largeUrl, toggleMod, srcSmall, srcLarge}) => {
        alt='' />
     </ImageGalleryItemLi>
   );
+}
+ImageGalleryItem.propTypes = {
+  id: PropTypes.number,
+  largeUrl: PropTypes.func.isRequired,
+  toggleMod: PropTypes.func.isRequired,
+  srcSmall: PropTypes.string.isRequired,
+  srcLarge: PropTypes.string.isRequired
+
+
 }
 export default ImageGalleryItem
 

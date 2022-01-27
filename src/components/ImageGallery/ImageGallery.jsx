@@ -1,6 +1,7 @@
 import React from "react"
 import { ImageGalleryUl } from "./ImageGallery.styled"
 import ImageGalleryItem from "../ImageGalleryItem"
+import PropTypes from "prop-types";
 
 const ImageGallery = ({images, toggleM, largeUrl}) => {
   return (
@@ -16,6 +17,11 @@ const ImageGallery = ({images, toggleM, largeUrl}) => {
         ))}
     </ImageGalleryUl>
   )
+}
+ImageGallery.propTypes={
+  images: PropTypes.array.isRequired,
+  toggleM: PropTypes.func.isRequired,
+  largeUrl: PropTypes.func.isRequired
 }
 export default ImageGallery
 

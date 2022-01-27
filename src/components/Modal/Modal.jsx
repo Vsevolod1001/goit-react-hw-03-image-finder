@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import { Overlay, ModalEl } from "./Modal.styled";
+import PropTypes from "prop-types";
 
 class Modal extends Component {
     componentDidMount() {
@@ -20,14 +21,20 @@ class Modal extends Component {
         }
     }
     render () {
+        const { srsLarge } = this.props;
+        
         return (
             <Overlay onClick={this.hendleBackdropClick}>
                 <ModalEl>
-                    <img src={this.props.srsLarge} alt="" />
+                    <img src={srsLarge} alt="" />
                 </ModalEl>
             </Overlay>
         )
     }
     
+}
+Modal.propTypes = {
+    hendleBackdropClick: PropTypes.func.isRequired,
+    srsLarge: PropTypes.string.isRequired
 }
 export default Modal
