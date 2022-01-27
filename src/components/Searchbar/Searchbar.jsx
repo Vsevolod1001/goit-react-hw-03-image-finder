@@ -28,7 +28,7 @@ class Searchbar extends Component {
       <SearchForm onSubmit={this.hendleSubmit}>
         <SearchFormBtn type="submit">
           <span>
-            <FiSearch />
+            <FiSearch size={30}/>
           </span>
         </SearchFormBtn>
 

@@ -35,15 +35,17 @@ class App extends Component {
               console.log(response)
               this.setState((prevState) => ({ 
                 images: [...prevState.images, ...response.data.hits] }))
+                if (response.data.hits.length === 0) {
+                  alert(`по запросу ${searchResults} изображений не найдено`)
+                }
+               
             } catch (error) {
-              
+              this.setState({ error });
             } finally {
               this.setState({isLoad: false})
-              if (images.length === 0) {
-                alert(`по запросу ${searchResults} изображений не найдено`)
-              }
-            }
-        } 
+              
+            }            
+        }        
         }
     //    fetch(`${BASE_URL}?q=${nextName}&page=${this.state.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`)
         // .then(res => res.json())
