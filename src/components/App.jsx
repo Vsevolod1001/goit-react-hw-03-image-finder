@@ -22,29 +22,29 @@ class App extends Component {
   
    async componentDidUpdate (prevProps, prevState) { 
         const nextName = this.state.searchResults; 
-        const prevName = prevState.searchResults ;     
-        if (prevName !== nextName || prevState.page !== this.state.page) {  
+        const prevName = prevState.searchResults ;   
+        const { page, images, searchResults } = this.state;
+          
+        if (prevName !== nextName || prevState.page !== page) {  
           
           if (prevName !== nextName)  {
             this.setState({page: 1, isLoad: true})
           }
-          try {
-            const response = await axios.get(`${BASE_URL}?q=${nextName}&page=${this.state.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`);
-            console.log(response)
-            this.setState((prevState) => ({ 
-              images: [...prevState.images, ...response.data.hits] }))
-          } catch (error) {
-            
-          } finally {
-            this.setState({isLoad: false})
-            if (this.state.images.length === 0) {
-              alert(`по запросу ${this.state.searchResults} изображений не найдено`)
+            try {
+              const response = await axios.get(`${BASE_URL}?q=${nextName}&page=${this.state.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`);
+              console.log(response)
+              this.setState((prevState) => ({ 
+                images: [...prevState.images, ...response.data.hits] }))
+            } catch (error) {
+              
+            } finally {
+              this.setState({isLoad: false})
+              if (images.length === 0) {
+                alert(`по запросу ${searchResults} изображений не найдено`)
+              }
             }
-          }
-         
-              } 
-                  
-          }
+        } 
+        }
     //    fetch(`${BASE_URL}?q=${nextName}&page=${this.state.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`)
         // .then(res => res.json())
         // .then(images => this.setState({images: images.hits}))
@@ -81,7 +81,6 @@ class App extends Component {
         largeUrl={hendleLargeImages}
       />
       {images.length > 0 && <Button onClick={hendleClickLoadMore}/>}
-      
       {showModal && <Modal onClose={toggleModal} srsLarge={largeImages}/>}
       
     </>

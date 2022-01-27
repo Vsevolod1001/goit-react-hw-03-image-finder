@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import { Overlay, ModalEl } from "./Modal.styled";
 import PropTypes from "prop-types";
 
+
 class Modal extends Component {
     componentDidMount() {
         window.addEventListener('keydown', this.hendleKeyDown);
