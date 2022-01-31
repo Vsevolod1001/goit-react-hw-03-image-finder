@@ -4,6 +4,9 @@ import PropTypes from "prop-types";
 
 
 class Modal extends Component {
+    static propTypes = {
+        srsLarge: PropTypes.string.isRequired,
+    } 
     componentDidMount() {
         window.addEventListener('keydown', this.hendleKeyDown);
     }
@@ -32,10 +35,7 @@ class Modal extends Component {
             </Overlay>
         )
     }
-    
+      
 }
-Modal.propTypes = {
-    hendleBackdropClick: PropTypes.func.isRequired,
-    srsLarge: PropTypes.string.isRequired
-}
+
 export default Modal

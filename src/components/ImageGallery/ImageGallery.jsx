@@ -19,7 +19,13 @@ const ImageGallery = ({images, toggleM, largeUrl}) => {
   )
 }
 ImageGallery.propTypes={
-  images: PropTypes.array.isRequired,
+  images: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      webformatURL: PropTypes.string.isRequired,
+      largeImageURL: PropTypes.string.isRequired,
+    })
+  ),
   toggleM: PropTypes.func.isRequired,
   largeUrl: PropTypes.func.isRequired
 }

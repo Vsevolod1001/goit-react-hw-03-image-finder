@@ -23,18 +23,21 @@ class App extends Component {
    async componentDidUpdate (prevProps, prevState) { 
         const nextName = this.state.searchResults; 
         const prevName = prevState.searchResults ;   
-        const { page, images, searchResults } = this.state;
+        const { page, searchResults } = this.state;
           
         if (prevName !== nextName || prevState.page !== page) {  
-          
+          this.setState({isLoad: true})
           if (prevName !== nextName)  {
-            this.setState({page: 1, isLoad: true})
+            this.setState({page: 1})
           }
             try {
-              const response = await axios.get(`${BASE_URL}?q=${nextName}&page=${this.state.page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`);
+              const response = await axios.get(`${BASE_URL}?q=${nextName}&page=${page}&key=${API_KEY}&image_type=photo&orientation=horizontal&per_page=12`);
               console.log(response)
+              const currentImg = response.data.hits.map(({id, webformatURL, largeImageURL}) => {
+                return {id, webformatURL, largeImageURL};
+              });
               this.setState((prevState) => ({ 
-                images: [...prevState.images, ...response.data.hits] }))
+                images: [...prevState.images, ...currentImg] }))
                 if (response.data.hits.length === 0) {
                   alert(`по запросу ${searchResults} изображений не найдено`)
                 }
@@ -77,11 +80,11 @@ class App extends Component {
       <Searchbar onSubmit={hendleSearchbarSubmit}/>
       {isLoad && <Loader />}
       {error && <Error />}
-      <ImageGallery 
+      {images.length > 0 && <ImageGallery 
         images={images}
         toggleM={toggleModal}
         largeUrl={hendleLargeImages}
-      />
+      />}
       {images.length > 0 && <Button onClick={hendleClickLoadMore}/>}
       {showModal && <Modal onClose={toggleModal} srsLarge={largeImages}/>}
       
